@@ -1,0 +1,35 @@
+{
+  "name": "recaudia-api",
+  "version": "1.0.0",
+  "description": "Recaudia -API\u001b[D\u001b[D\u001b[D \u001b[C\u001b[CAPI",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start-dev": "nodemon index.js",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/brayan.salas/recaudia-api.git"
+  },
+  "author": "Brayan Salas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/brayan.salas/recaudia-api/issues"
+  },
+  "homepage": "https://gitlab.com/brayan.salas/recaudia-api#README",
+  "devDependencies": {
+    "nodemon": "^1.17.1",
+    "standard": "^11.0.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "chalk": "^2.3.2",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "pg": "^7.4.1",
+    "pg-promise": "^8.1.1",
+    "uuid": "^3.2.1"
+  }
+}
