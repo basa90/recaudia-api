@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+
+
+
+
+<meta name="abstract" content=""/>
+<meta name="description" content=""/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=4893383978572482"/>
+<title>Frequently Asked Questions</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+
+  <script src="../../resources/sap/ui/thirdparty/jquery.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/highlight-query-terms.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/framewrapper.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../resources/sap/ui/demokit/themes/base/highlight-query-terms.css" />
+    <script src="../../resources/sap/ui/demokit/js/google-code-prettify/run_prettify.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/google-code-prettify/lang-css.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../resources/sap/ui/demokit/js/google-code-prettify/prettify.css" />
+  </head>
+<body class="" id="loio02ef39f70a244c7cb0cb4d65be6ae396">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Frequently Asked Questions</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc"/>
+
+		<div class="section collapsible"><div class="section_title">How can I avoid timeouts?</div><div type="How can I avoid timeouts?">
+			
+			<div class="p">There are two important situations where you might have trouble with timeouts:<ul class="ul" id="loio02ef39f70a244c7cb0cb4d65be6ae396__ul_lrm_pzv_kx">
+					<li class="li">
+						<p class="p">When loading your app</p>
+
+					</li>
+
+					<li class="li">
+						<p class="p">When trying to find <span class="ph"><span class="ph pname">OpenUI5</span></span> controls in the app</p>
+
+					</li>
+
+				</ul>
+</div>
+
+			<div class="p">When loading the app, the OPA5 command can accept a second parameter, which is the number of seconds to wait for the application to load.
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint lang-js"><samp class="ph codeph">#!js</samp>var opa5 = new Opa5();
+opa5.iStartMyAppInAFrame("path/to/your/app.html", 30); // wait time in seconds</pre></div>
+</div>
+
+			<div class="p">You can set the following OPA5 setting to cause OPA5 to wait a different amount of time for a control to become available on the
+				screen:<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint lang-js"><samp class="ph codeph">#!js</samp>sap.ui.test.Opa.config.timeout = 20; // wait time in seconds</pre></div>
+</div>
+
+		</div></div>
+
+		<div class="section collapsible"><div class="section_title">Who should write feature files?</div><div type="Who should write feature files?">
+			
+			<p class="p">Ideally, the Product Owner (PO) develops feature files in collaboration with developers. Depending on the PO's level of comfort, they can upload the
+				feature files directly to source control, or let the developers take care of that.</p>
+
+		</div></div>
+
+		<div class="section collapsible"><div class="section_title">When writing the step definitions, the feature file is inadequate! What to do?</div><div type="When writing the step definitions, the feature file is inadequate! What to do?">
+			
+			<p class="p">You will usually find that there is a gap between what the PO has written, and the information that the developer requires to implement an
+				integration test. It's ok for the developer to modify the feature file to enable testing, as long as they check back with the PO to ensure that
+				the feature file is still correct.</p>
+
+		</div></div>
+
+		<div class="section collapsible"><div class="section_title">Every time the PO modifies the feature file it breaks the tests: what can we do about this?</div><div type="Every time the PO modifies the feature file it breaks the tests: what can we do about this?">
+			
+			<p class="p">Actually, this is the point of Gherkin. When modifications to a feature file are uploaded to source control, we expect this to break existing
+				tests, as it should, since the application's expected behavior has changed—but the application itself has not changed yet. Gherkin is forcing
+				the application to stay in sync with the feature file. Consider that this also encourages you to be more honest about accepting new feature
+				changes into your product—and the amount of extra work that this entails. We recommend that you use your formal code review process to allow
+				developers to change the application and fix the tests, and then submit all the new code together with the feature file changes at the same time
+				into the master branch.</p>
+
+		</div></div>
+
+	</div>
+
+</div></div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Frequently Asked Questions";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

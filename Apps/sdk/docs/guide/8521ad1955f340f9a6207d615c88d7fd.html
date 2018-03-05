@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+
+
+
+
+<meta name="abstract" content="Description of the performance-relevant attributes that are available for the descriptor for applications, components and libraries"/>
+<meta name="description" content="Description of the performance-relevant attributes that are available for the descriptor for applications, components and libraries"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=635219815346749"/>
+<title>Declaring Dependencies to Libraries and Components in the Descriptor</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+
+  <script src="../../resources/sap/ui/thirdparty/jquery.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/highlight-query-terms.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/framewrapper.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../resources/sap/ui/demokit/themes/base/highlight-query-terms.css" />
+    <script src="../../resources/sap/ui/demokit/js/google-code-prettify/run_prettify.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/google-code-prettify/lang-css.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../resources/sap/ui/demokit/js/google-code-prettify/prettify.css" />
+  </head>
+<body class="" id="loio8521ad1955f340f9a6207d615c88d7fd">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Declaring Dependencies to Libraries and Components in the Descriptor</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">Description of the performance-relevant attributes that are available for the descriptor
+		for applications, components and libraries</p>
+
+		<p class="p">For information about the performance-relevant attributes,  see
+				<samp class="ph codeph">sap.ui5/dependencies</samp> in <a class="xref" href="be0cf40f61184b358b5faedaec98b2da.html" title="The descriptor for applications, components, and libraries is inspired by the Web Application Manifest concept introduced by the W3C. The descriptor provides a central, machine-readable and easy-to-access location for storing metadata associated with an application, an application component, or a library.">Descriptor for Applications, Components, and Libraries</a>.</p>
+
+		<div class="section"><div class="section_title">Dependencies to Libraries</div><div type="Dependencies to Libraries">
+			
+			<p class="p">The following dependencies to libraries can be implemented:</p>
+
+			<ul class="ul" id="loio8521ad1955f340f9a6207d615c88d7fd__ul_dsz_whf_vx">
+				<li class="li">
+					<p class="p">To benefit from the asynchronous library preload, add the mandatory libraries
+						to <samp class="ph codeph">sap.ui5/dependencies/libs</samp>.</p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">Add optional libraries to <samp class="ph codeph">sap.ui5/dependencies/libs</samp> and flag them as
+							<samp class="ph codeph">lazy</samp>. This allows the app index to provide the client
+						with URL information also for these optional libraries. The dependency
+						information may also be needed for other tools, for example for offline
+						packaging for mobile devices. </p>
+
+				</li>
+
+			</ul>
+
+			<p class="p">For <span class="ph emphasis emphasis">applications and components</span>, modify the
+					<samp class="ph codeph">manifest.json</samp> as follows:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">"sap.ui5": {
+    ...
+    "dependencies": {
+      ...
+      "libs": {
+        "sap.m": {},
+        "sap.suite.ui.commons": {
+          "lazy": true
+        }
+      }
+      ...
+    },
+    ...
+</pre></div>
+
+			<p class="p">For <span class="ph emphasis emphasis">libraries</span>, modify the <samp class="ph codeph">.library</samp> file as shown in the
+				following code sample. This file is generated from the
+					<samp class="ph codeph">manifest.json</samp> for libraries.</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">&lt;dependencies&gt;
+    &lt;dependency&gt;
+       &lt;libraryName&gt;sap.m&lt;/libraryName&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+       &lt;libraryName&gt;sap.suite.ui.commons&lt;/libraryName&gt;
+       &lt;lazy&gt;true&lt;/lazy&gt;
+    &lt;/dependency&gt;
+    ...</pre></div>
+
+			<p class="p">In a second step, modify the <samp class="ph codeph">library.js</samp> file as follows:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">sap.ui.getCore().initLibrary({
+   ...
+   dependencies : ["sap.ui.core","sap.m"], // lazy libs are not declared here</pre></div>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">In all cases, the lazy libraries need to be loaded manually in the application or library via
+					the <samp class="ph codeph">loadLibrary</samp> API:</p>
+
+				<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">// lazy lib loaded synchronously
+sap.ui.getCore().loadLibrary("sap.suite.ui.commons");</pre></div>
+
+			</div>
+
+			<div class="note tip"><span class="tiptitle">Tip</span> Execute the <samp class="ph codeph">loadLibrary</samp> before any resource of the
+				library is required to preload the complete library instead of loading each resource
+				individually.</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Dependencies to Components</div><div type="Dependencies to Components">
+			
+			<p class="p"><span class="ph emphasis emphasis">Scenario 1:</span> UI library contains multiple components</p>
+
+			<p class="p">In this scenario, the library is the leading container and <span class="ph emphasis emphasis">no</span>
+				component preload is available. This means, that you maintain the library dependency
+				as described above. This is true for all kinds of component dependencies, also for
+					<samp class="ph codeph">sap.ui5/extends/component</samp>. If the extended component originates
+				in a library, do <span class="ph emphasis emphasis">not</span> use
+					<samp class="ph codeph">sap.ui5.extends/component</samp>, but only declare the library
+				dependency. Otherwise, the component dependency causes a 404 request.</p>
+
+			<p class="p">For loading lazy comonents inside a library, proceed with the library mechanisms as
+				described above:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">// lazy lib loaded synchronously
+sap.ui.getCore().loadLibrary("sap.suite.ui.commons");</pre></div>
+
+			<p class="p"><span class="ph emphasis emphasis">Scenario 2:</span> Standalone component</p>
+
+			<p class="p">In this scenario, you only maintain a dependency to the component. The component
+				preload is available for this scenario:</p>
+
+			<ul class="ul" id="loio8521ad1955f340f9a6207d615c88d7fd__ul_wbz_ljg_vx">
+				<li class="li">
+					<p class="p">To benefit from the asynchronous components preload, add the mandatory
+						components to <samp class="ph codeph">sap.ui5/dependencies/components</samp></p>
+
+				</li>
+
+				<li class="li">
+					<p class="p">Add the <span class="ph emphasis emphasis">optional</span> components to
+							<samp class="ph codeph">sap.ui5/dependencies/components</samp> and flag them as
+							<samp class="ph codeph">lazy</samp>.</p>
+
+				</li>
+
+			</ul>
+
+			<p class="p">For applications and components, modify the <samp class="ph codeph">manifest.json</samp> as
+				follows:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">"sap.ui5": {
+    ...
+    "dependencies": {
+      ...
+      "libs": {
+        ...
+      },
+      "components": {
+        "samples.components.sample": {},
+        "samples.components.samplelazy": {
+          "lazy": true
+        }
+        ...
+      }
+    },
+    ...
+</pre></div>
+
+			<p class="p">For loading the lazy standalone components, use the component factory:</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint">sap.ui.component({
+ ...
+ async: true // use async: true if the Component creation should be done asynchronously
+}); </pre></div>
+
+		</div></div>
+
+	</div>
+
+</div></div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Declaring Dependencies to Libraries and Components in the Descriptor";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

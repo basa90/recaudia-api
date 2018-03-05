@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="sap.f" xmlns:n2="sap.f" xmlns:n0="sap.ui.core" xmlns:n1="sap.m">
+<xsd:import namespace="sap.ui.core"/>
+<xsd:import namespace="sap.m"/>
+<xsd:element name="DynamicPageHeader" type="n2:_DynamicPageHeaderType" substitutionGroup="n0:Control">
+<xsd:annotation>
+<xsd:documentation>&lt;strong&gt;&lt;i&gt;Overview&lt;/i&gt;&lt;/strong&gt;
+&lt;br&gt;&lt;br&gt;
+The {@link sap.f.DynamicPageHeader DynamicPageHeader} control is part
+of the {@link sap.f.DynamicPage} family and is used to serve as header
+of the {@link sap.f.DynamicPage DynamicPage}.
+&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;&lt;i&gt;Usage&lt;/i&gt;&lt;/strong&gt;
+&lt;br&gt;&lt;br&gt;
+The {@link sap.f.DynamicPageHeader DynamicPageHeader} can hold any
+layout control and has two states - expanded and collapsed (snapped).
+The switching between these states happens when:
+&lt;ul&gt;
+&lt;li&gt;the user scrolls below its bottom margin&lt;/li&gt;
+&lt;li&gt;the user clicks on the
+{@link sap.f.DynamicPageTitle DynamicPageTitle}&lt;/li&gt;
+&lt;li&gt;through the {@link sap.f.DynamicPage DynamicPage}
+property &lt;code&gt;headerExpanded&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;strong&gt;&lt;i&gt;Responsive Behavior&lt;/i&gt;&lt;/strong&gt;
+&lt;br&gt;&lt;br&gt;
+The responsive behavior of the
+{@link sap.f.DynamicPageHeader DynamicPageHeader} depends on the
+behavior of the content that is displayed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="DynamicPageTitle" type="n2:_DynamicPageTitleType" substitutionGroup="n0:Control">
+<xsd:annotation>
+<xsd:documentation>&lt;strong&gt;&lt;i&gt;Overview&lt;/i&gt;&lt;/strong&gt;
+&lt;br&gt;&lt;br&gt;
+The {@link sap.f.DynamicPageTitle DynamicPageTitle} control is part of
+the {@link sap.f.DynamicPage} family and is used to serve as title of
+the {@link sap.f.DynamicPage DynamicPage}.
+&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;&lt;i&gt;Usage&lt;/i&gt;&lt;/strong&gt;
+&lt;br&gt;&lt;br&gt;
+The {@link sap.f.DynamicPageTitle DynamicPageTitle} can hold any
+control and displays the most important information regarding the
+object that will always remain visible while scrolling.
+&lt;br&gt;&lt;br&gt;
+&lt;b&gt;Note:&lt;/b&gt; The &lt;code&gt;actions&lt;/code&gt; aggregation accepts any UI5 control, but it`s recommended to use controls,
+suitable for {@link sap.m.Toolbar} and {@link sap.m.OverflowToolbar}.
+&lt;br&gt;&lt;br&gt;
+By clicking on the {@link sap.f.DynamicPageTitle DynamicPageTitle},
+the user can switch between the expanded/collapsed states of the
+{@link sap.f.DynamicPageHeader DynamicPageHeader}.
+&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;&lt;i&gt;Responsive Behavior&lt;/i&gt;&lt;/strong&gt;
+&lt;br&gt;&lt;br&gt;
+The responsive behavior of the
+{@link sap.f.DynamicPageTitle DynamicPageTitle} depends on the
+behavior of the content that is displayed.</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<!--type definition for UIElement 'sap.f.DynamicPageHeader'-->
+<xsd:complexType name="_DynamicPageHeaderType">
+<xsd:complexContent>
+<xsd:extension base="n0:_ControlType">
+<xsd:sequence>
+<xsd:element name="content" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The content of the header.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:choice minOccurs="0" maxOccurs="unbounded">
+<xsd:element ref="n0:Control"/>
+<xsd:element ref="n0:Fragment"/>
+<xsd:any processContents="lax" namespace="http://www.w3.org/1999/xhtml"/>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+<xsd:attribute name="pinnable" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation>Determines whether the header is pinnable.</xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<!--type definition for UIElement 'sap.f.DynamicPageTitle'-->
+<xsd:complexType name="_DynamicPageTitleType">
+<xsd:complexContent>
+<xsd:extension base="n0:_ControlType">
+<xsd:sequence>
+<xsd:element name="heading" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The title or any other UI5 control that serves as a heading for the object.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:choice minOccurs="0">
+<xsd:element ref="n0:Control"/>
+<xsd:element ref="n0:Fragment"/>
+<xsd:any processContents="lax" namespace="http://www.w3.org/1999/xhtml"/>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="actions" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The &lt;code&gt;DynamicPageTitle&lt;/code&gt; actions.
+&lt;br&gt;&lt;b&gt;Note:&lt;/b&gt; The &lt;code&gt;actions&lt;/code&gt; aggregation accepts any UI5 control, but it`s recommended to use controls,
+suitable for {@link sap.m.Toolbar} and {@link sap.m.OverflowToolbar}.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:choice minOccurs="0" maxOccurs="unbounded">
+<xsd:element ref="n0:Control"/>
+<xsd:element ref="n0:Fragment"/>
+<xsd:any processContents="lax" namespace="http://www.w3.org/1999/xhtml"/>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="snappedContent" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The content that is displayed in the &lt;code&gt;DynamicPageTitle&lt;/code&gt; in collapsed (snapped) state.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:choice minOccurs="0" maxOccurs="unbounded">
+<xsd:element ref="n0:Control"/>
+<xsd:element ref="n0:Fragment"/>
+<xsd:any processContents="lax" namespace="http://www.w3.org/1999/xhtml"/>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="expandedContent" minOccurs="0">
+<xsd:annotation>
+<xsd:documentation>The content that is displayed in the &lt;code&gt;DynamicPageTitle&lt;/code&gt; in expanded state.</xsd:documentation>
+</xsd:annotation>
+<xsd:complexType>
+<xsd:sequence>
+<xsd:choice minOccurs="0" maxOccurs="unbounded">
+<xsd:element ref="n0:Control"/>
+<xsd:element ref="n0:Fragment"/>
+<xsd:any processContents="lax" namespace="http://www.w3.org/1999/xhtml"/>
+</xsd:choice>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:extension>
+</xsd:complexContent>
+</xsd:complexType>
+<xsd:simpleType name="_ThreeColumnLayoutTypeType">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="EndColumnEmphasized">
+<xsd:annotation>
+<xsd:documentation>Emphasized last column (endColumn) - column layout 25/25/50</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+<xsd:enumeration value="MidColumnEmphasized">
+<xsd:annotation>
+<xsd:documentation>Emphasized middle column (midColumn) - column layout 25/50/25</xsd:documentation>
+</xsd:annotation>
+</xsd:enumeration>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

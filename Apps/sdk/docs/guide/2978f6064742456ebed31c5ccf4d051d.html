@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+
+
+
+
+<meta name="abstract" content="This guide outlines the most important points when creating Blocks for the Object Page"/>
+<meta name="description" content="This guide outlines the most important points when creating Blocks for the Object Page"/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=1469267711055966"/>
+<title>Creating Blocks: A Step-by-Step Guide</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+
+  <script src="../../resources/sap/ui/thirdparty/jquery.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/highlight-query-terms.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/framewrapper.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../resources/sap/ui/demokit/themes/base/highlight-query-terms.css" />
+    <script src="../../resources/sap/ui/demokit/js/google-code-prettify/run_prettify.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/google-code-prettify/lang-css.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../resources/sap/ui/demokit/js/google-code-prettify/prettify.css" />
+  </head>
+<body class="" id="loio2978f6064742456ebed31c5ccf4d051d">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Creating Blocks: A Step-by-Step Guide</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">This guide outlines the most important points when creating Blocks for the Object
+		Page</p>
+
+		<p class="p"><span class="ph emphasis emphasis">Decide which kind of block to use:</span></p>
+
+		<ul class="ul" id="loio2978f6064742456ebed31c5ccf4d051d__ul_uxq_zrj_ls">
+			<li class="li">
+				<p class="p">Single view block if <samp class="ph codeph">Collapsed</samp>, <samp class="ph codeph">Expanded</samp> and
+						<samp class="ph codeph">Compact</samp> modes are similar and easy to develop with a single
+					view.</p>
+
+			</li>
+
+			<li class="li">
+				<p class="p">Multiple view blocks if it’s easier to provide different views for the different
+					modes.</p>
+
+			</li>
+
+			<li class="li">
+				<p class="p">Free form if none of these suit your needs.</p>
+
+			</li>
+
+		</ul>
+
+		<p class="p"><span class="ph emphasis emphasis">Single View Block Creation</span></p>
+
+		<ul class="ul" id="loio2978f6064742456ebed31c5ccf4d051d__ul_h1x_gsj_ls">
+			<li class="li">
+				<p class="p">Create the block folder in the source control of the
+					application.</p>
+
+			</li>
+
+			<li class="li">
+				<div class="p">Add a <samp class="ph codeph">BlockName.js</samp> which extends <samp class="ph codeph">BlockBase</samp>.<div class="note note"><span class="notetitle">Note</span> 
+						<p class="p">Naming guideline: The Block name should end with the word
+								<span class="ph emphasis emphasis">Block</span>.</p>
+
+					</div>
+</div>
+
+			</li>
+
+			<li class="li">
+				<p class="p">Add a <samp class="ph codeph">BlockName.view.xml</samp> XML view.</p>
+
+			</li>
+
+			<li class="li">
+				<p class="p">If needed, add the associated controller:
+						<samp class="ph codeph">BlockNameController.controller.js</samp></p>
+
+			</li>
+
+		</ul>
+
+		<p class="p"><span class="ph emphasis emphasis">Multiple View Block Creation</span></p>
+
+		<ul class="ul" id="loio2978f6064742456ebed31c5ccf4d051d__ul_bbz_gsj_ls">
+			<li class="li">
+				<p class="p">Create the block
+					folder in the source control of the application.</p>
+
+			</li>
+
+			<li class="li">
+				<p class="p">Add a <samp class="ph codeph">BlockName.js</samp> which extends <samp class="ph codeph">BlockBase</samp>.</p>
+
+			</li>
+
+			<li class="li">
+				<p class="p">Declare the views to be used for the different modes in the <samp class="ph codeph">views</samp> section of
+					the metadata.</p>
+
+			</li>
+
+			<li class="li">
+				<div class="p">Add the <samp class="ph codeph">Expanded</samp> and <samp class="ph codeph">Collapsed</samp> XML views.<div class="note note"><span class="notetitle">Note</span> 
+						<p class="p">Naming guideline: Call these files <samp class="ph codeph">BlockNameCollapsed.view.xml</samp>,
+								<samp class="ph codeph">BlockNameExpanded.view.xml</samp></p>
+
+					</div>
+</div>
+
+			</li>
+
+			<li class="li">
+				<p class="p">If needed, add the associated controllers. Whether you use the same controller for all views
+					or one controller per view is your decision.</p>
+
+			</li>
+
+		</ul>
+
+		<p class="p"><span class="ph emphasis emphasis">Free Form
+				Block Creation</span></p>
+
+		<ul class="ul" id="loio2978f6064742456ebed31c5ccf4d051d__ul_urt_bxj_ls">
+			<li class="li">
+				<p class="p">Create the block
+					folder in the source control of the application.</p>
+
+			</li>
+
+			<li class="li">
+				<p class="p">Add a <samp class="ph codeph">BlockName.js</samp> which extends <samp class="ph codeph">BlockBase</samp>.</p>
+
+			</li>
+
+			<li class="li">
+				<p class="p">Override the <samp class="ph codeph">setMode</samp> function - from here on, all changes are up to you. </p>
+
+			</li>
+
+		</ul>
+
+	</div>
+
+</div></div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Creating Blocks: A Step-by-Step Guide";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>

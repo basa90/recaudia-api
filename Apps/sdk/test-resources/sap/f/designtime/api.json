@@ -1,0 +1,1173 @@
+{
+	"$schema-ref": "http://schemas.sap.com/sapui5/designtime/api.json/1.0",
+	"version": "1.42.7",
+	"library": "sap.f",
+	"symbols": [
+		{
+			"kind": "namespace",
+			"name": "sap.f",
+			"basename": "f",
+			"resource": "sap/f/library.js",
+			"module": "sap/f/library",
+			"static": true,
+			"visibility": "public",
+			"description": "SAPUI5 library with controls specialized for Fiori applications."
+		},
+		{
+			"kind": "class",
+			"name": "sap.f.DynamicPage",
+			"basename": "DynamicPage",
+			"resource": "sap/f/DynamicPage.js",
+			"module": "sap/f/DynamicPage",
+			"static": true,
+			"visibility": "public",
+			"since": "1.42",
+			"extends": "sap.ui.core.Control",
+			"description": "<strong><i>Overview</i></strong>\n<br><br>\nA {@link sap.f.DynamicPage} is a control that is used as a layout for an\napplication. It consists of a title, a header, content and a footer.\nAdditionally it offers dynamic behavior when scrolling, where part of the\nheader snaps to the title.\n<br><br>\n<strong>Notes:</strong>\n<ul><li>If you're displaying a {@link sap.m.FlexBox FlexBox} control with\nnon-adaptive content (doesn't stretch to fill the available space), it is\nrecommended to set the <code>fitContainer</code> property of the\n{@link sap.m.FlexBox FlexBox} to <code>false</code>.</li>\n<li>If you are displaying a {@link sap.ui.table.Table}, keep in mind that it is\nnon-adaptive and may cause unpredicted behavior for the\n{@link sap.f.DynamicPage DynamicPage} on smaller screen sizes, such as mobile.</li>\n</ul>\n<strong><i>Structure</i></strong>\n<br><br>\nThe control consist of several components -\n{@link sap.f.DynamicPageTitle DynamicPageTitle},\n{@link sap.f.DynamicPageHeader DynamicPageHeader}, a content area, and a footer:\n<ul><li>{@link sap.f.DynamicPageTitle DynamicPageTitle} - consists of a heading\non the left side, content in the middle, and actions on the right. The displayed\ncontent changes based on the current mode of the {@link sap.f.DynamicPageHeader\nDynamicPageHeader}.</li>\n<li>{@link sap.f.DynamicPageHeader DynamicPageHeader} - a generic container, which\ncan contain a single layout control and does not care about the content alignment\nand responsiveness. The header works in two modes - expanded and snapped and its\nbehavior can be adjusted with the help of different properties.</li>\n<li>Content area - a generic container, which can have a single UI5 layout control\nand does not care about the content alignment and responsiveness.</li>\n<li>Footer - positioned at the bottom with a small offset and used for additional\nactions, the footer floats above the content. It can be any {@link sap.m.IBar}\ncontrol.</li>\n</ul>\n<strong><i>Usage</i></strong>\n<br><br>\nUse the {@link sap.f.DynamicPage DynamicPage} if you need to have a title, that is\nalways visible and a header, that has configurable Expanding/Snapping functionality.\nIf you don't need the Expanding/Snapping functionality it is better to use the\n{@link sap.m.Page} as a lighter control.\n<br><br>\n<strong><i>Responsive Behavior</i></strong>\n<br><br>\nThe responsive behavior of the {@link sap.f.DynamicPage DynamicPage} depends on the\nbehavior of the content that is displayed.",
+			"ui5-metadata": {
+				"stereotype": "control",
+				"properties": [
+					{
+						"name": "preserveHeaderStateOnScroll",
+						"type": "boolean",
+						"defaultValue": false,
+						"group": "Behaviour",
+						"visibility": "public",
+						"description": "Preserves the current header state when scrolling.\nFor example, if the user expands the header by clicking on the title and then scrolls down the page, the header will remain expanded.\n<br><b>Note:</b> Based on internal rules, the value of the property is not always taken into account - for example,\nwhen the control is rendered on tablet or mobile and the control`s title and header\nare with height larger than the given threshold.",
+						"methods": [
+							"getPreserveHeaderStateOnScroll",
+							"setPreserveHeaderStateOnScroll"
+						]
+					},
+					{
+						"name": "headerExpanded",
+						"type": "boolean",
+						"defaultValue": true,
+						"group": "Behaviour",
+						"visibility": "public",
+						"description": "Determines whether the header is expanded.\n<br><b>Note:</b> Based on internal rules, the value of the property is not always taken into account - for example\nwhen the expanded header is larger than the available screen area. For those cases a warning is logged.\nThe header can be also expanded/collapsed by user interaction, which requires the property to be\ninternally mutated by the control to reflect the changed state.",
+						"methods": [
+							"getHeaderExpanded",
+							"setHeaderExpanded"
+						]
+					},
+					{
+						"name": "showFooter",
+						"type": "boolean",
+						"defaultValue": false,
+						"group": "Behaviour",
+						"visibility": "public",
+						"description": "Determines whether the footer is visible.",
+						"methods": [
+							"getShowFooter",
+							"setShowFooter"
+						]
+					}
+				],
+				"aggregations": [
+					{
+						"name": "title",
+						"singularName": "title",
+						"type": "sap.f.DynamicPageTitle",
+						"cardinality": "0..1",
+						"visibility": "public",
+						"description": "<code>DynamicPage</code> title.",
+						"methods": [
+							"getTitle",
+							"destroyTitle",
+							"setTitle"
+						]
+					},
+					{
+						"name": "header",
+						"singularName": "header",
+						"type": "sap.f.DynamicPageHeader",
+						"cardinality": "0..1",
+						"visibility": "public",
+						"description": "<code>DynamicPage</code> header.",
+						"methods": [
+							"getHeader",
+							"destroyHeader",
+							"setHeader"
+						]
+					},
+					{
+						"name": "content",
+						"singularName": "content",
+						"type": "sap.ui.core.Control",
+						"cardinality": "0..1",
+						"visibility": "public",
+						"description": "<code>DynamicPage</code> content.",
+						"methods": [
+							"getContent",
+							"destroyContent",
+							"setContent"
+						]
+					},
+					{
+						"name": "footer",
+						"singularName": "footer",
+						"type": "sap.m.IBar",
+						"cardinality": "0..1",
+						"visibility": "public",
+						"description": "<code>DynamicPage</code> floating footer.",
+						"methods": [
+							"getFooter",
+							"destroyFooter",
+							"setFooter"
+						]
+					},
+					{
+						"name": "_scrollBar",
+						"singularName": "_scrollBar",
+						"type": "sap.ui.core.ScrollBar",
+						"cardinality": "0..1",
+						"visibility": "hidden",
+						"description": "<code>DynamicPage</code> custom <code>ScrollBar</code>.",
+						"methods": [
+							"get_scrollBar",
+							"destroy_scrollBar",
+							"set_scrollBar"
+						]
+					}
+				]
+			},
+			"constructor": {
+				"visibility": "public",
+				"parameters": [
+					{
+						"name": "sId",
+						"type": "string",
+						"optional": true,
+						"description": "ID for the new control, generated automatically if no ID is given"
+					},
+					{
+						"name": "mSettings",
+						"type": "object",
+						"optional": true,
+						"description": "Initial settings for the new control"
+					}
+				],
+				"description": "Constructor for a new Dynamic Page.\n\n\nAccepts an object literal <code>mSettings</code> that defines initial\nproperty values, aggregated and associated objects as well as event handlers.\nSee {@link sap.ui.base.ManagedObject#constructor} for a general description of the syntax of the settings object."
+			},
+			"methods": [
+				{
+					"name": "destroyContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"description": "Destroys the content in the aggregation <code>content</code>."
+				},
+				{
+					"name": "destroyFooter",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"description": "Destroys the footer in the aggregation <code>footer</code>."
+				},
+				{
+					"name": "destroyHeader",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"description": "Destroys the header in the aggregation <code>header</code>."
+				},
+				{
+					"name": "destroyTitle",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"description": "Destroys the title in the aggregation <code>title</code>."
+				},
+				{
+					"name": "extend",
+					"visibility": "public",
+					"static": true,
+					"returnValue": {
+						"type": "function",
+						"description": "Created class / constructor function"
+					},
+					"parameters": [
+						{
+							"name": "sClassName",
+							"type": "string",
+							"optional": false,
+							"description": "Name of the class being created"
+						},
+						{
+							"name": "oClassInfo",
+							"type": "object",
+							"optional": true,
+							"description": "Object literal with information about the class"
+						},
+						{
+							"name": "FNMetaImpl",
+							"type": "function",
+							"optional": true,
+							"description": "Constructor function for the metadata object; if not given, it defaults to <code>sap.ui.core.ElementMetadata</code>"
+						}
+					],
+					"description": "Creates a new subclass of class sap.f.DynamicPage with name <code>sClassName</code>\nand enriches it with the information contained in <code>oClassInfo</code>.\n\n<code>oClassInfo</code> might contain the same kind of information as described in {@link sap.ui.core.Control.extend}."
+				},
+				{
+					"name": "getContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control"
+					},
+					"description": "Gets content of aggregation <code>content</code>.\n\n<code>DynamicPage</code> content."
+				},
+				{
+					"name": "getFooter",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.m.IBar"
+					},
+					"description": "Gets content of aggregation <code>footer</code>.\n\n<code>DynamicPage</code> floating footer."
+				},
+				{
+					"name": "getHeader",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageHeader"
+					},
+					"description": "Gets content of aggregation <code>header</code>.\n\n<code>DynamicPage</code> header."
+				},
+				{
+					"name": "getHeaderExpanded",
+					"visibility": "public",
+					"returnValue": {
+						"type": "boolean",
+						"description": "Value of property <code>headerExpanded</code>"
+					},
+					"description": "Gets current value of property <code>headerExpanded</code>.\n\nDetermines whether the header is expanded.\n<br><b>Note:</b> Based on internal rules, the value of the property is not always taken into account - for example\nwhen the expanded header is larger than the available screen area. For those cases a warning is logged.\nThe header can be also expanded/collapsed by user interaction, which requires the property to be\ninternally mutated by the control to reflect the changed state.\n\nDefault value is <code>true</code>."
+				},
+				{
+					"name": "getMetadata",
+					"visibility": "public",
+					"static": true,
+					"returnValue": {
+						"type": "sap.ui.base.Metadata",
+						"description": "Metadata object describing this class"
+					},
+					"description": "Returns a metadata object for class sap.f.DynamicPage."
+				},
+				{
+					"name": "getPreserveHeaderStateOnScroll",
+					"visibility": "public",
+					"returnValue": {
+						"type": "boolean",
+						"description": "Value of property <code>preserveHeaderStateOnScroll</code>"
+					},
+					"description": "Gets current value of property <code>preserveHeaderStateOnScroll</code>.\n\nPreserves the current header state when scrolling.\nFor example, if the user expands the header by clicking on the title and then scrolls down the page, the header will remain expanded.\n<br><b>Note:</b> Based on internal rules, the value of the property is not always taken into account - for example,\nwhen the control is rendered on tablet or mobile and the control`s title and header\nare with height larger than the given threshold.\n\nDefault value is <code>false</code>."
+				},
+				{
+					"name": "getShowFooter",
+					"visibility": "public",
+					"returnValue": {
+						"type": "boolean",
+						"description": "Value of property <code>showFooter</code>"
+					},
+					"description": "Gets current value of property <code>showFooter</code>.\n\nDetermines whether the footer is visible.\n\nDefault value is <code>false</code>."
+				},
+				{
+					"name": "getTitle",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle"
+					},
+					"description": "Gets content of aggregation <code>title</code>.\n\n<code>DynamicPage</code> title."
+				},
+				{
+					"name": "setContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oContent",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "The content to set"
+						}
+					],
+					"description": "Sets the aggregated <code>content</code>."
+				},
+				{
+					"name": "setFooter",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oFooter",
+							"type": "sap.m.IBar",
+							"optional": false,
+							"description": "The footer to set"
+						}
+					],
+					"description": "Sets the aggregated <code>footer</code>."
+				},
+				{
+					"name": "setHeader",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oHeader",
+							"type": "sap.f.DynamicPageHeader",
+							"optional": false,
+							"description": "The header to set"
+						}
+					],
+					"description": "Sets the aggregated <code>header</code>."
+				},
+				{
+					"name": "setHeaderExpanded",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "bHeaderExpanded",
+							"type": "boolean",
+							"optional": false,
+							"description": "New value for property <code>headerExpanded</code>"
+						}
+					],
+					"description": "Sets a new value for property <code>headerExpanded</code>.\n\nDetermines whether the header is expanded.\n<br><b>Note:</b> Based on internal rules, the value of the property is not always taken into account - for example\nwhen the expanded header is larger than the available screen area. For those cases a warning is logged.\nThe header can be also expanded/collapsed by user interaction, which requires the property to be\ninternally mutated by the control to reflect the changed state.\n\nWhen called with a value of <code>null</code> or <code>undefined</code>, the default value of the property will be restored.\n\nDefault value is <code>true</code>."
+				},
+				{
+					"name": "setPreserveHeaderStateOnScroll",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "bPreserveHeaderStateOnScroll",
+							"type": "boolean",
+							"optional": false,
+							"description": "New value for property <code>preserveHeaderStateOnScroll</code>"
+						}
+					],
+					"description": "Sets a new value for property <code>preserveHeaderStateOnScroll</code>.\n\nPreserves the current header state when scrolling.\nFor example, if the user expands the header by clicking on the title and then scrolls down the page, the header will remain expanded.\n<br><b>Note:</b> Based on internal rules, the value of the property is not always taken into account - for example,\nwhen the control is rendered on tablet or mobile and the control`s title and header\nare with height larger than the given threshold.\n\nWhen called with a value of <code>null</code> or <code>undefined</code>, the default value of the property will be restored.\n\nDefault value is <code>false</code>."
+				},
+				{
+					"name": "setShowFooter",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "bShowFooter",
+							"type": "boolean",
+							"optional": false,
+							"description": "New value for property <code>showFooter</code>"
+						}
+					],
+					"description": "Sets a new value for property <code>showFooter</code>.\n\nDetermines whether the footer is visible.\n\nWhen called with a value of <code>null</code> or <code>undefined</code>, the default value of the property will be restored.\n\nDefault value is <code>false</code>."
+				},
+				{
+					"name": "setTitle",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPage",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oTitle",
+							"type": "sap.f.DynamicPageTitle",
+							"optional": false,
+							"description": "The title to set"
+						}
+					],
+					"description": "Sets the aggregated <code>title</code>."
+				}
+			]
+		},
+		{
+			"kind": "class",
+			"name": "sap.f.DynamicPageHeader",
+			"basename": "DynamicPageHeader",
+			"resource": "sap/f/DynamicPageHeader.js",
+			"module": "sap/f/DynamicPageHeader",
+			"static": true,
+			"visibility": "public",
+			"since": "1.42",
+			"extends": "sap.ui.core.Control",
+			"description": "<strong><i>Overview</i></strong>\n<br><br>\nThe {@link sap.f.DynamicPageHeader DynamicPageHeader} control is part\nof the {@link sap.f.DynamicPage} family and is used to serve as header\nof the {@link sap.f.DynamicPage DynamicPage}.\n<br><br>\n<strong><i>Usage</i></strong>\n<br><br>\nThe {@link sap.f.DynamicPageHeader DynamicPageHeader} can hold any\nlayout control and has two states - expanded and collapsed (snapped).\nThe switching between these states happens when:\n<ul>\n<li>the user scrolls below its bottom margin</li>\n<li>the user clicks on the\n{@link sap.f.DynamicPageTitle DynamicPageTitle}</li>\n<li>through the {@link sap.f.DynamicPage DynamicPage}\nproperty <code>headerExpanded</code></li>\n</ul>\n<strong><i>Responsive Behavior</i></strong>\n<br><br>\nThe responsive behavior of the\n{@link sap.f.DynamicPageHeader DynamicPageHeader} depends on the\nbehavior of the content that is displayed.",
+			"ui5-metadata": {
+				"stereotype": "control",
+				"properties": [
+					{
+						"name": "pinnable",
+						"type": "boolean",
+						"defaultValue": true,
+						"group": "Appearance",
+						"visibility": "public",
+						"description": "Determines whether the header is pinnable.",
+						"methods": [
+							"getPinnable",
+							"setPinnable"
+						]
+					}
+				],
+				"aggregations": [
+					{
+						"name": "content",
+						"singularName": "content",
+						"type": "sap.ui.core.Control",
+						"cardinality": "0..n",
+						"visibility": "public",
+						"description": "The content of the header.",
+						"methods": [
+							"getContent",
+							"destroyContent",
+							"insertContent",
+							"addContent",
+							"removeContent",
+							"indexOfContent",
+							"removeAllContent"
+						]
+					},
+					{
+						"name": "_pinButton",
+						"singularName": "_pinButton",
+						"type": "sap.m.Button",
+						"cardinality": "0..1",
+						"visibility": "hidden",
+						"description": "The pin/unpin button in the header.",
+						"methods": [
+							"get_pinButton",
+							"destroy_pinButton",
+							"set_pinButton"
+						]
+					}
+				]
+			},
+			"constructor": {
+				"visibility": "public",
+				"parameters": [
+					{
+						"name": "sId",
+						"type": "string",
+						"optional": true,
+						"description": "ID for the new control, generated automatically if no ID is given"
+					},
+					{
+						"name": "mSettings",
+						"type": "object",
+						"optional": true,
+						"description": "Initial settings for the new control"
+					}
+				],
+				"description": "Constructor for a new <code>DynamicPageHeader</code>.\n\n\nAccepts an object literal <code>mSettings</code> that defines initial\nproperty values, aggregated and associated objects as well as event handlers.\nSee {@link sap.ui.base.ManagedObject#constructor} for a general description of the syntax of the settings object."
+			},
+			"methods": [
+				{
+					"name": "addContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageHeader",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oContent",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "the content to add; if empty, nothing is inserted"
+						}
+					],
+					"description": "Adds some content to the aggregation <code>content</code>."
+				},
+				{
+					"name": "destroyContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageHeader",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"description": "Destroys all the content in the aggregation <code>content</code>."
+				},
+				{
+					"name": "extend",
+					"visibility": "public",
+					"static": true,
+					"returnValue": {
+						"type": "function",
+						"description": "Created class / constructor function"
+					},
+					"parameters": [
+						{
+							"name": "sClassName",
+							"type": "string",
+							"optional": false,
+							"description": "Name of the class being created"
+						},
+						{
+							"name": "oClassInfo",
+							"type": "object",
+							"optional": true,
+							"description": "Object literal with information about the class"
+						},
+						{
+							"name": "FNMetaImpl",
+							"type": "function",
+							"optional": true,
+							"description": "Constructor function for the metadata object; if not given, it defaults to <code>sap.ui.core.ElementMetadata</code>"
+						}
+					],
+					"description": "Creates a new subclass of class sap.f.DynamicPageHeader with name <code>sClassName</code>\nand enriches it with the information contained in <code>oClassInfo</code>.\n\n<code>oClassInfo</code> might contain the same kind of information as described in {@link sap.ui.core.Control.extend}."
+				},
+				{
+					"name": "getContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control[]"
+					},
+					"description": "Gets content of aggregation <code>content</code>.\n\nThe content of the header."
+				},
+				{
+					"name": "getMetadata",
+					"visibility": "public",
+					"static": true,
+					"returnValue": {
+						"type": "sap.ui.base.Metadata",
+						"description": "Metadata object describing this class"
+					},
+					"description": "Returns a metadata object for class sap.f.DynamicPageHeader."
+				},
+				{
+					"name": "getPinnable",
+					"visibility": "public",
+					"returnValue": {
+						"type": "boolean",
+						"description": "Value of property <code>pinnable</code>"
+					},
+					"description": "Gets current value of property <code>pinnable</code>.\n\nDetermines whether the header is pinnable.\n\nDefault value is <code>true</code>."
+				},
+				{
+					"name": "indexOfContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "int",
+						"description": "The index of the provided control in the aggregation if found, or -1 otherwise"
+					},
+					"parameters": [
+						{
+							"name": "oContent",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "The content whose index is looked for"
+						}
+					],
+					"description": "Checks for the provided <code>sap.ui.core.Control</code> in the aggregation <code>content</code>.\nand returns its index if found or -1 otherwise."
+				},
+				{
+					"name": "insertContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageHeader",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oContent",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "the content to insert; if empty, nothing is inserted"
+						},
+						{
+							"name": "iIndex",
+							"type": "int",
+							"optional": false,
+							"description": "the <code>0</code>-based index the content should be inserted at; for\n             a negative value of <code>iIndex</code>, the content is inserted at position 0; for a value\n             greater than the current size of the aggregation, the content is inserted at\n             the last position"
+						}
+					],
+					"description": "Inserts a content into the aggregation <code>content</code>."
+				},
+				{
+					"name": "removeAllContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control[]",
+						"description": "An array of the removed elements (might be empty)"
+					},
+					"description": "Removes all the controls from the aggregation <code>content</code>.\n\nAdditionally, it unregisters them from the hosting UIArea."
+				},
+				{
+					"name": "removeContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control",
+						"description": "The removed content or <code>null</code>"
+					},
+					"parameters": [
+						{
+							"name": "vContent",
+							"type": "int|string|sap.ui.core.Control",
+							"optional": false,
+							"description": "The content to remove or its index or id"
+						}
+					],
+					"description": "Removes a content from the aggregation <code>content</code>."
+				},
+				{
+					"name": "setPinnable",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageHeader",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "bPinnable",
+							"type": "boolean",
+							"optional": false,
+							"description": "New value for property <code>pinnable</code>"
+						}
+					],
+					"description": "Sets a new value for property <code>pinnable</code>.\n\nDetermines whether the header is pinnable.\n\nWhen called with a value of <code>null</code> or <code>undefined</code>, the default value of the property will be restored.\n\nDefault value is <code>true</code>."
+				}
+			]
+		},
+		{
+			"kind": "class",
+			"name": "sap.f.DynamicPageTitle",
+			"basename": "DynamicPageTitle",
+			"resource": "sap/f/DynamicPageTitle.js",
+			"module": "sap/f/DynamicPageTitle",
+			"static": true,
+			"visibility": "public",
+			"since": "1.42",
+			"extends": "sap.ui.core.Control",
+			"description": "<strong><i>Overview</i></strong>\n<br><br>\nThe {@link sap.f.DynamicPageTitle DynamicPageTitle} control is part of\nthe {@link sap.f.DynamicPage} family and is used to serve as title of\nthe {@link sap.f.DynamicPage DynamicPage}.\n<br><br>\n<strong><i>Usage</i></strong>\n<br><br>\nThe {@link sap.f.DynamicPageTitle DynamicPageTitle} can hold any\ncontrol and displays the most important information regarding the\nobject that will always remain visible while scrolling.\n<br><br>\n<b>Note:</b> The <code>actions</code> aggregation accepts any UI5 control, but it`s recommended to use controls,\nsuitable for {@link sap.m.Toolbar} and {@link sap.m.OverflowToolbar}.\n<br><br>\nBy clicking on the {@link sap.f.DynamicPageTitle DynamicPageTitle},\nthe user can switch between the expanded/collapsed states of the\n{@link sap.f.DynamicPageHeader DynamicPageHeader}.\n<br><br>\n<strong><i>Responsive Behavior</i></strong>\n<br><br>\nThe responsive behavior of the\n{@link sap.f.DynamicPageTitle DynamicPageTitle} depends on the\nbehavior of the content that is displayed.",
+			"ui5-metadata": {
+				"stereotype": "control",
+				"aggregations": [
+					{
+						"name": "heading",
+						"singularName": "heading",
+						"type": "sap.ui.core.Control",
+						"cardinality": "0..1",
+						"visibility": "public",
+						"description": "The title or any other UI5 control that serves as a heading for the object.",
+						"methods": [
+							"getHeading",
+							"destroyHeading",
+							"setHeading"
+						]
+					},
+					{
+						"name": "actions",
+						"singularName": "action",
+						"type": "sap.ui.core.Control",
+						"cardinality": "0..n",
+						"visibility": "public",
+						"description": "The <code>DynamicPageTitle</code> actions.\n<br><b>Note:</b> The <code>actions</code> aggregation accepts any UI5 control, but it`s recommended to use controls,\nsuitable for {@link sap.m.Toolbar} and {@link sap.m.OverflowToolbar}.",
+						"methods": [
+							"getActions",
+							"destroyActions",
+							"insertAction",
+							"addAction",
+							"removeAction",
+							"indexOfAction",
+							"removeAllActions"
+						]
+					},
+					{
+						"name": "snappedContent",
+						"singularName": "snappedContent",
+						"type": "sap.ui.core.Control",
+						"cardinality": "0..n",
+						"visibility": "public",
+						"description": "The content that is displayed in the <code>DynamicPageTitle</code> in collapsed (snapped) state.",
+						"methods": [
+							"getSnappedContent",
+							"destroySnappedContent",
+							"insertSnappedContent",
+							"addSnappedContent",
+							"removeSnappedContent",
+							"indexOfSnappedContent",
+							"removeAllSnappedContent"
+						]
+					},
+					{
+						"name": "expandedContent",
+						"singularName": "expandedContent",
+						"type": "sap.ui.core.Control",
+						"cardinality": "0..n",
+						"visibility": "public",
+						"description": "The content that is displayed in the <code>DynamicPageTitle</code> in expanded state.",
+						"methods": [
+							"getExpandedContent",
+							"destroyExpandedContent",
+							"insertExpandedContent",
+							"addExpandedContent",
+							"removeExpandedContent",
+							"indexOfExpandedContent",
+							"removeAllExpandedContent"
+						]
+					},
+					{
+						"name": "_overflowToolbar",
+						"singularName": "_overflowToolbar",
+						"type": "sap.ui.core.Control",
+						"cardinality": "0..1",
+						"visibility": "hidden",
+						"description": "Internal <code>OverflowToolbar</code> for the <code>DynamicPageTitle</code> actions.",
+						"methods": [
+							"get_overflowToolbar",
+							"destroy_overflowToolbar",
+							"set_overflowToolbar"
+						]
+					}
+				]
+			},
+			"constructor": {
+				"visibility": "public",
+				"parameters": [
+					{
+						"name": "sId",
+						"type": "string",
+						"optional": true,
+						"description": "ID for the new control, generated automatically if no ID is given"
+					},
+					{
+						"name": "mSettings",
+						"type": "object",
+						"optional": true,
+						"description": "Initial settings for the new control"
+					}
+				],
+				"description": "Constructor for a new <code>DynamicPageTitle</code>.\n\n\nAccepts an object literal <code>mSettings</code> that defines initial\nproperty values, aggregated and associated objects as well as event handlers.\nSee {@link sap.ui.base.ManagedObject#constructor} for a general description of the syntax of the settings object."
+			},
+			"methods": [
+				{
+					"name": "addAction",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oAction",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "the action to add; if empty, nothing is inserted"
+						}
+					],
+					"description": "Adds some action to the aggregation <code>actions</code>."
+				},
+				{
+					"name": "addExpandedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oExpandedContent",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "the expandedContent to add; if empty, nothing is inserted"
+						}
+					],
+					"description": "Adds some expandedContent to the aggregation <code>expandedContent</code>."
+				},
+				{
+					"name": "addSnappedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oSnappedContent",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "the snappedContent to add; if empty, nothing is inserted"
+						}
+					],
+					"description": "Adds some snappedContent to the aggregation <code>snappedContent</code>."
+				},
+				{
+					"name": "destroyActions",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"description": "Destroys all the actions in the aggregation <code>actions</code>."
+				},
+				{
+					"name": "destroyExpandedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"description": "Destroys all the expandedContent in the aggregation <code>expandedContent</code>."
+				},
+				{
+					"name": "destroyHeading",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"description": "Destroys the heading in the aggregation <code>heading</code>."
+				},
+				{
+					"name": "destroySnappedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"description": "Destroys all the snappedContent in the aggregation <code>snappedContent</code>."
+				},
+				{
+					"name": "extend",
+					"visibility": "public",
+					"static": true,
+					"returnValue": {
+						"type": "function",
+						"description": "Created class / constructor function"
+					},
+					"parameters": [
+						{
+							"name": "sClassName",
+							"type": "string",
+							"optional": false,
+							"description": "Name of the class being created"
+						},
+						{
+							"name": "oClassInfo",
+							"type": "object",
+							"optional": true,
+							"description": "Object literal with information about the class"
+						},
+						{
+							"name": "FNMetaImpl",
+							"type": "function",
+							"optional": true,
+							"description": "Constructor function for the metadata object; if not given, it defaults to <code>sap.ui.core.ElementMetadata</code>"
+						}
+					],
+					"description": "Creates a new subclass of class sap.f.DynamicPageTitle with name <code>sClassName</code>\nand enriches it with the information contained in <code>oClassInfo</code>.\n\n<code>oClassInfo</code> might contain the same kind of information as described in {@link sap.ui.core.Control.extend}."
+				},
+				{
+					"name": "getActions",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control[]"
+					},
+					"description": "Gets content of aggregation <code>actions</code>.\n\nThe <code>DynamicPageTitle</code> actions.\n<br><b>Note:</b> The <code>actions</code> aggregation accepts any UI5 control, but it`s recommended to use controls,\nsuitable for {@link sap.m.Toolbar} and {@link sap.m.OverflowToolbar}."
+				},
+				{
+					"name": "getExpandedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control[]"
+					},
+					"description": "Gets content of aggregation <code>expandedContent</code>.\n\nThe content that is displayed in the <code>DynamicPageTitle</code> in expanded state."
+				},
+				{
+					"name": "getHeading",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control"
+					},
+					"description": "Gets content of aggregation <code>heading</code>.\n\nThe title or any other UI5 control that serves as a heading for the object."
+				},
+				{
+					"name": "getMetadata",
+					"visibility": "public",
+					"static": true,
+					"returnValue": {
+						"type": "sap.ui.base.Metadata",
+						"description": "Metadata object describing this class"
+					},
+					"description": "Returns a metadata object for class sap.f.DynamicPageTitle."
+				},
+				{
+					"name": "getSnappedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control[]"
+					},
+					"description": "Gets content of aggregation <code>snappedContent</code>.\n\nThe content that is displayed in the <code>DynamicPageTitle</code> in collapsed (snapped) state."
+				},
+				{
+					"name": "indexOfAction",
+					"visibility": "public",
+					"returnValue": {
+						"type": "int",
+						"description": "The index of the provided control in the aggregation if found, or -1 otherwise"
+					},
+					"parameters": [
+						{
+							"name": "oAction",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "The action whose index is looked for"
+						}
+					],
+					"description": "Checks for the provided <code>sap.ui.core.Control</code> in the aggregation <code>actions</code>.\nand returns its index if found or -1 otherwise."
+				},
+				{
+					"name": "indexOfExpandedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "int",
+						"description": "The index of the provided control in the aggregation if found, or -1 otherwise"
+					},
+					"parameters": [
+						{
+							"name": "oExpandedContent",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "The expandedContent whose index is looked for"
+						}
+					],
+					"description": "Checks for the provided <code>sap.ui.core.Control</code> in the aggregation <code>expandedContent</code>.\nand returns its index if found or -1 otherwise."
+				},
+				{
+					"name": "indexOfSnappedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "int",
+						"description": "The index of the provided control in the aggregation if found, or -1 otherwise"
+					},
+					"parameters": [
+						{
+							"name": "oSnappedContent",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "The snappedContent whose index is looked for"
+						}
+					],
+					"description": "Checks for the provided <code>sap.ui.core.Control</code> in the aggregation <code>snappedContent</code>.\nand returns its index if found or -1 otherwise."
+				},
+				{
+					"name": "insertAction",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oAction",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "the action to insert; if empty, nothing is inserted"
+						},
+						{
+							"name": "iIndex",
+							"type": "int",
+							"optional": false,
+							"description": "the <code>0</code>-based index the action should be inserted at; for\n             a negative value of <code>iIndex</code>, the action is inserted at position 0; for a value\n             greater than the current size of the aggregation, the action is inserted at\n             the last position"
+						}
+					],
+					"description": "Inserts a action into the aggregation <code>actions</code>."
+				},
+				{
+					"name": "insertExpandedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oExpandedContent",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "the expandedContent to insert; if empty, nothing is inserted"
+						},
+						{
+							"name": "iIndex",
+							"type": "int",
+							"optional": false,
+							"description": "the <code>0</code>-based index the expandedContent should be inserted at; for\n             a negative value of <code>iIndex</code>, the expandedContent is inserted at position 0; for a value\n             greater than the current size of the aggregation, the expandedContent is inserted at\n             the last position"
+						}
+					],
+					"description": "Inserts a expandedContent into the aggregation <code>expandedContent</code>."
+				},
+				{
+					"name": "insertSnappedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oSnappedContent",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "the snappedContent to insert; if empty, nothing is inserted"
+						},
+						{
+							"name": "iIndex",
+							"type": "int",
+							"optional": false,
+							"description": "the <code>0</code>-based index the snappedContent should be inserted at; for\n             a negative value of <code>iIndex</code>, the snappedContent is inserted at position 0; for a value\n             greater than the current size of the aggregation, the snappedContent is inserted at\n             the last position"
+						}
+					],
+					"description": "Inserts a snappedContent into the aggregation <code>snappedContent</code>."
+				},
+				{
+					"name": "removeAction",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control",
+						"description": "The removed action or <code>null</code>"
+					},
+					"parameters": [
+						{
+							"name": "vAction",
+							"type": "int|string|sap.ui.core.Control",
+							"optional": false,
+							"description": "The action to remove or its index or id"
+						}
+					],
+					"description": "Removes a action from the aggregation <code>actions</code>."
+				},
+				{
+					"name": "removeAllActions",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control[]",
+						"description": "An array of the removed elements (might be empty)"
+					},
+					"description": "Removes all the controls from the aggregation <code>actions</code>.\n\nAdditionally, it unregisters them from the hosting UIArea."
+				},
+				{
+					"name": "removeAllExpandedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control[]",
+						"description": "An array of the removed elements (might be empty)"
+					},
+					"description": "Removes all the controls from the aggregation <code>expandedContent</code>.\n\nAdditionally, it unregisters them from the hosting UIArea."
+				},
+				{
+					"name": "removeAllSnappedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control[]",
+						"description": "An array of the removed elements (might be empty)"
+					},
+					"description": "Removes all the controls from the aggregation <code>snappedContent</code>.\n\nAdditionally, it unregisters them from the hosting UIArea."
+				},
+				{
+					"name": "removeExpandedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control",
+						"description": "The removed expandedContent or <code>null</code>"
+					},
+					"parameters": [
+						{
+							"name": "vExpandedContent",
+							"type": "int|string|sap.ui.core.Control",
+							"optional": false,
+							"description": "The expandedContent to remove or its index or id"
+						}
+					],
+					"description": "Removes a expandedContent from the aggregation <code>expandedContent</code>."
+				},
+				{
+					"name": "removeSnappedContent",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.ui.core.Control",
+						"description": "The removed snappedContent or <code>null</code>"
+					},
+					"parameters": [
+						{
+							"name": "vSnappedContent",
+							"type": "int|string|sap.ui.core.Control",
+							"optional": false,
+							"description": "The snappedContent to remove or its index or id"
+						}
+					],
+					"description": "Removes a snappedContent from the aggregation <code>snappedContent</code>."
+				},
+				{
+					"name": "setHeading",
+					"visibility": "public",
+					"returnValue": {
+						"type": "sap.f.DynamicPageTitle",
+						"description": "Reference to <code>this</code> in order to allow method chaining"
+					},
+					"parameters": [
+						{
+							"name": "oHeading",
+							"type": "sap.ui.core.Control",
+							"optional": false,
+							"description": "The heading to set"
+						}
+					],
+					"description": "Sets the aggregated <code>heading</code>."
+				}
+			]
+		},
+		{
+			"kind": "enum",
+			"name": "sap.f.ThreeColumnLayoutType",
+			"basename": "ThreeColumnLayoutType",
+			"resource": "sap/f/library.js",
+			"module": "sap/f/library",
+			"static": true,
+			"visibility": "public",
+			"since": "1.42",
+			"description": "Types of three-column layout for the sap.f.FlexibleColumnLayout control",
+			"properties": [
+				{
+					"name": "EndColumnEmphasized",
+					"visibility": "public",
+					"static": true,
+					"type": "string",
+					"description": "Emphasized last column (endColumn) - column layout 25/25/50"
+				},
+				{
+					"name": "MidColumnEmphasized",
+					"visibility": "public",
+					"static": true,
+					"type": "string",
+					"description": "Emphasized middle column (midColumn) - column layout 25/50/25"
+				}
+			]
+		}
+	]
+}

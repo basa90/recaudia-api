@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-us">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+
+
+
+
+<meta name="abstract" content="Routing in OpenUI5 provides the possibility to define titles declaratively in its configuration. The title can be set with valid binding syntax which is then resolved under the scope of the target which it belongs to. This means the title is translatable when it’s bound to the i18n model or resolved dynamically under the current binding context."/>
+<meta name="description" content="Routing in OpenUI5 provides the possibility to define titles declaratively in its configuration. The title can be set with valid binding syntax which is then resolved under the scope of the target which it belongs to. This means the title is translatable when it’s bound to the i18n model or resolved dynamically under the current binding context."/>
+
+<link rel="stylesheet" type="text/css" href="css/documentation.css?x=7422242586692572"/>
+<title>Using title in Targets</title>
+<!--[if lte IE 7]><style>
+      .codeblock{
+          overflow:visible;
+      }</style><![endif]-->
+
+  <script src="../../resources/sap/ui/thirdparty/jquery.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/highlight-query-terms.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/framewrapper.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../resources/sap/ui/demokit/themes/base/highlight-query-terms.css" />
+    <script src="../../resources/sap/ui/demokit/js/google-code-prettify/run_prettify.js"></script>
+    <script src="../../resources/sap/ui/demokit/js/google-code-prettify/lang-css.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../resources/sap/ui/demokit/js/google-code-prettify/prettify.css" />
+  </head>
+<body class="" id="loio1238d706b130433c9bd6b85cfb77cece">
+<div id="wrapper"><div id="container">
+
+	<h1 class="title topictitle1">Using title in Targets</h1>
+
+	
+	<div class="body conbody"><p class="shortdesc">Routing in <span class="ph"><span class="ph pname">OpenUI5</span></span> provides the possibility to define titles declaratively in its
+		configuration. The title can be set with valid binding syntax which is then resolved under the scope of the target which it belongs to. This means the
+		title is translatable when it’s bound to the i18n model or resolved dynamically under the current binding context.</p>
+
+		<p class="p">When a new target (that has <samp class="ph codeph">title</samp> property defined) is displayed or the title of the current target changes, the
+				<samp class="ph codeph">titleChanged</samp> event is fired. The event contains the current title and the history of previously displayed titles. You can use
+			this event to update the title for your app. </p>
+
+		<div class="section"><div class="section_title">Examples for setting the title in Target</div><div type="Examples for setting the title in Target">
+			
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><samp class="ph codeph">#!js</samp>{
+    ...,
+    "routes": [{
+        "pattern": "products/overview",
+        "name": "ProductsOverview",
+        "target": "products"
+    }],
+    "targets": {
+        "products": {
+            "viewPath": "shop.products",
+            "viewName": "Products",
+            <span class="ph emphasis emphasis">"title": "Products Overview"
+</span>
+        }
+    },
+    ...
+}</pre></div>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><samp class="ph codeph">#!js</samp>{
+    ...,
+    "routes": [{
+        "pattern": "products/{id}",
+        "name": "Product",
+        "target": "product"
+    }],
+    "targets": {
+        "product": {
+            "viewPath": "shop.products",
+            "viewName": "Product",
+            <span class="ph emphasis emphasis">"title": {
+                "parts": ["i18n&gt;/PRODUCTS_TITLE", "myModel&gt;productName"],
+                "formatter": "jQuery.sap.formatMessage"
+            }
+</span>
+        }
+    },
+    ...
+}</pre></div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Defining titleTarget in Route</div><div type="Defining titleTarget in Route">
+			
+			<div class="p">A route can display multiple targets and you can use the <samp class="ph codeph">titleTarget</samp> option in the <samp class="ph codeph">Route</samp> configuration to
+				specify explicitly from which target the title should be taken. By default, the <samp class="ph codeph">Route</samp> taked the title of the first target that
+				has <samp class="ph codeph">title</samp>
+				defined.<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><samp class="ph codeph">#!js</samp>{
+    ...,
+    "routes": [{
+        "pattern": "product/{id}/parts",
+        "name": "ProductParts",
+        "target": ["product", "productParts"],
+        <span class="ph emphasis emphasis">"titleTarget": "productParts"
+</span>
+    }],
+    "targets": {
+        "product": {
+            "viewPath": "shop.products",
+            "viewName": "Product",
+            "title": "Product"
+        },
+        "productParts": {
+            "viewPath": "shop.products",
+            "viewName": "Product",
+            "title": "Product Parts"
+        }
+    },
+    ...
+}</pre></div>
+</div>
+
+		</div></div>
+
+		<div class="section"><div class="section_title">Listenting to the titleChanged event</div><div type="Listenting to the titleChanged event">
+			
+			<p class="p">In order to get notified once the title is changed, you can register to the <samp class="ph codeph">titleChanged</samp> event on the <samp class="ph codeph">Router</samp>
+				instance. The <samp class="ph codeph">titleChanged</samp> event is then fired once a target which has a <samp class="ph codeph">title</samp> options set is displayed or the
+				title of a displayed target is changed (e.g. because the binding context changes).</p>
+
+			<div class="div_pre_codeblock"><pre class="pre codeblock prettyprint"><samp class="ph codeph">#!js</samp>oRouter.attachTitleChanged(function(oEvent) {
+    var sTitle = oEvent.getParameter("title"),
+        aHistory = oEvent.getParameter("history");
+
+    // Example usage: set the browser page title (you are not obliged to do this)
+    document.title = sTitle;
+
+    aHistory.reverse().forEach(function(oHistory) {
+        // show the history in a dropdown
+        // oDropdown.addItem(new Item({
+        //	text: oHistory.title
+        //}).data("hash", oHistory.hash));
+    });
+});</pre></div>
+
+			<div class="note note"><span class="notetitle">Note</span> 
+				<p class="p">In the SAP Fiori launchpad, you don't need this event, the title is updated automatically.</p>
+
+			</div>
+
+		</div></div>
+
+	</div>
+
+</div></div>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+ var page_title="Using title in Targets";
+
+        if (page_title !='' &&
+        parent.document.title != null) {
+ parent.document.title =
+          page_title;
+ } 
+ var
+        anchor = document.getElementById(location.hash.substring(+1)); if (typeof (anchor)
+        !='undefined' && anchor !=null){
+        var top = anchor.getBoundingClientRect().top; } 
+//-->
+</SCRIPT>
+</body>
+</html>
